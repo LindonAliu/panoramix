@@ -5,9 +5,17 @@
 ** FreeKOSOVO
 */
 
-#include "all_lib.h"
+#include "panoramix.h"
 
-int main(UNUSED int argc, UNUSED const char *argv[], UNUSED const char *env[])
+int main(int argc, const char *argv[])
 {
-    return 84;
+    int error = error_handling(argc, argv);
+    int return_value = 0;
+
+    if (error < 0) {
+        return_value = 84;
+        print_help(argv[0]);
+    } else if (error == 0)
+        return_value = panoramix(argv);
+    return return_value;
 }

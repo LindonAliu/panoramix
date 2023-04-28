@@ -8,9 +8,10 @@
 #ifndef MY_PROJECT_H_
     #define MY_PROJECT_H_
 
-    #include "my.h"
+    #include "all_lib.h"
 
-int handly_error(int argc UNUSED, const char *argv[] UNUSED, const char *env[]);
-int function(const char *str);
+void print_help(const char *bin_name);
+int error_handling(int argc, const char *argv[]);
+int panoramix(const char *av[]);
 
 #endif/* !MY_PROJECT_H_ */

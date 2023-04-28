@@ -23,12 +23,12 @@ OBJ_TEST	=	$(SRC_TEST:%.c=obj/tests/%.o) $(SRC_ALL:%.c=obj/debug/%.o)
 LIBMY		=	lib/libmy.a
 DEBUGFLAGS	+=
 
-EXEC		=	bin
+EXEC		=	panoramix
 
 TEST		=	unit_tests
 
-CPPFLAGS	+=	-Wall -Wextra -iquote "include" -g3
-CFLAGS		+=
+CPPFLAGS	+=	-iquote "include"
+CFLAGS		+=	-Wall -Wextra -Wpedantic
 LDFLAGS		=	-Llib -lmy
 
 all:	$(EXEC)

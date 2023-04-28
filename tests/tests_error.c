@@ -7,17 +7,31 @@
 
 #include <criterion/criterion.h>
 #include <stddef.h>
-#include "my_project.h"
+#include "panoramix.h"
 
 Test(all_errors, test_argc)
 {
-    const char *env[] = {"env", NULL};
-    const char *env_error[] = {NULL, NULL};
-    const char *argc[] = {"./bin", "argument"};
+    const char *argv[] = {"./bin", "1", "2", "3", "4", NULL};
+    const char *argv_incorrect[] = {"./bin", "0", "2", "3", "4", NULL};
+    
+    const char *av[] = {"./bin", NULL};
+    const char *argv_help[] = {"./bin", "--help", NULL};
+    const char *argv_help1[] = {"./bin", "-h", NULL};
 
-    cr_assert_eq(handly_error(0, argc, env), -1);
-    cr_assert_eq(handly_error(2, NULL, env), -1);
-    cr_assert_eq(handly_error(2, argc, NULL), -1);
-    cr_assert_eq(handly_error(2, argc, env_error), -1);
-    cr_assert_eq(handly_error(2, argc, env), 0);
+    const char *argv_invalid_help[] = {"./bin", "-ho", NULL};
+
+    const char *incorrect_av0[] = {"./bin", "un", "deux", "trois", "quatre", NULL};
+    const char *incorrect_av1[] = {"./bin", "1", NULL};
+
+    cr_assert_eq(error_handling(5, argv), 0);
+
+    cr_assert_eq(error_handling(1, av), 1);
+    cr_assert_eq(error_handling(2, argv_help), 1);
+    cr_assert_eq(error_handling(2, argv_help1), 1);
+
+    cr_assert_eq(error_handling(5, argv_incorrect), -1);
+    cr_assert_eq(error_handling(2, argv_invalid_help), -1);
+    
+    cr_assert_eq(error_handling(5, incorrect_av0), -1);
+    cr_assert_eq(error_handling(2, incorrect_av1), -1);
 }

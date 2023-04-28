@@ -11,10 +11,7 @@
 
 #include "my_printf.h"
 
-int function(const char *str)
+int panoramix(const char *av[])
 {
-    if (!str)
-        return (-1);
-    my_printf("%s\n", str);
     return (0);
 }
