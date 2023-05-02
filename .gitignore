@@ -2,3 +2,4 @@
 *.o
 panoramix
 *.a
+coding-style-reports.log
