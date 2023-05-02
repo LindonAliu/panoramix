@@ -35,4 +35,8 @@ struct village {
     pthread_mutex_t potion_mutex;
 };
 
+typedef void *handler_t(void *arg);
+handler_t druid;
+handler_t villager;
+
 #endif/* !MY_PROJECT_H_ */

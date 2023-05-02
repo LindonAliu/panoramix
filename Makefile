@@ -5,7 +5,9 @@
 ## Make nice stuff
 ##
 
-SRC_ALL		=	functions.c	\
+SRC_ALL		=	panoramix.c	\
+				druid.c		\
+				villagers.c	\
 				error.c
 
 SRC_NT		=	main.c
