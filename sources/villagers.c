@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "panoramix.h"
 
-void villager_fight(struct villager *v)
+static void villager_fight(struct villager *v)
 {
     if (v->drunk) {
         v->drunk = false;
@@ -18,7 +18,7 @@ void villager_fight(struct villager *v)
     }
 }
 
-void villager_drink(struct villager *v)
+static void villager_drink(struct villager *v)
 {
     pthread_mutex_lock(&v->village->potion_mutex);
 

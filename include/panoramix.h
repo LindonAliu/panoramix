@@ -5,12 +5,11 @@
 ** FreeKOSOVO
 */
 
-#ifndef MY_PROJECT_H_
-    #define MY_PROJECT_H_
+#pragma once
 
-    #include "all_lib.h"
-    #include <pthread.h>
-    #include <stdbool.h>
+#include "all_lib.h"
+#include <pthread.h>
+#include <stdbool.h>
 
 void print_help(const char *bin_name);
 int error_handling(int argc, const char *argv[]);
@@ -38,5 +37,3 @@ struct village {
 typedef void *handler_t(void *arg);
 handler_t druid;
 handler_t villager;
-
-#endif/* !MY_PROJECT_H_ */
