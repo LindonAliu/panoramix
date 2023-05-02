@@ -31,7 +31,10 @@ struct druid {
 struct village {
     size_t nb_potions;
     bool call_druid;
+    bool no_refills;
     pthread_mutex_t potion_mutex;
+    pthread_cond_t druid_cond;
+    pthread_cond_t villager_cond;
 };
 
 typedef void *handler_t(void *arg);

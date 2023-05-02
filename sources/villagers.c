@@ -26,8 +26,14 @@ static void villager_drink(struct villager *v)
         v->id, v->village->nb_potions);
 
     if (v->village->nb_potions == 0) {
-        printf("Villager %ld: Druid! I need a drink!\n", v->id);
+        printf("Villager %ld: Hey Pano wake up! We need more potion.\n", v->id);
         v->village->call_druid = true;
+        while (v->village->call_druid) {
+            pthread_cond_wait(&v->village->villager_cond,
+                &v->village->potion_mutex);
+        }
+        v->village->nb_potions--;
+        v->drunk = true;
     } else {
         v->village->nb_potions--;
         v->drunk = true;
