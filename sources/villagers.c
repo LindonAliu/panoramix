@@ -18,6 +18,22 @@ static void villager_fight(struct villager *v)
     }
 }
 
+static void drink(struct villager *v)
+{
+    v->village->nb_potions--;
+    v->drunk = true;
+}
+
+static void call_druid(struct villager *v)
+{
+    v->village->call_druid = true;
+    pthread_cond_signal(&v->village->druid_cond);
+    while (v->village->call_druid) {
+        pthread_cond_wait(&v->village->villager_cond,
+            &v->village->druid_mutex);
+    }
+}
+
 static void villager_drink(struct villager *v)
 {
     pthread_mutex_lock(&v->village->villager_mutex);
@@ -26,17 +42,10 @@ static void villager_drink(struct villager *v)
 
     if (v->village->nb_potions == 0) {
         printf("Villager %ld: Hey Pano wake up! We need more potion.\n", v->id);
-        v->village->call_druid = true;
-        pthread_cond_signal(&v->village->druid_cond);
-        while (v->village->call_druid) {
-            pthread_cond_wait(&v->village->villager_cond,
-                &v->village->druid_mutex);
-        }
-        v->village->nb_potions--;
-        v->drunk = true;
+        call_druid(v);
+        drink(v);
     } else {
-        v->village->nb_potions--;
-        v->drunk = true;
+        drink(v);
     }
     pthread_mutex_unlock(&v->village->villager_mutex);
 }
@@ -51,5 +60,14 @@ void *villager(void *arg)
         villager_fight(v);
     }
     printf("Villager %ld: I'm going to sleep now.\n", v->id);
+
+    pthread_mutex_lock(&v->village->villager_mutex);
+    v->village->nb_villagers_finished++;
+    pthread_mutex_unlock(&v->village->villager_mutex);
+
+    if (all_fights_are_over(v->village) && !v->village->no_more_refills) {
+        call_druid(v);
+        printf("je lache lantenne villager\n");
+    }
     return NULL;
 }
