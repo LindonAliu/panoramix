@@ -40,7 +40,7 @@ int panoramix(const char *av[])
 {
     struct village v = {atoi(av[2]), false, false,
         PTHREAD_MUTEX_INITIALIZER, PTHREAD_COND_INITIALIZER,
-        PTHREAD_COND_INITIALIZER};
+        PTHREAD_MUTEX_INITIALIZER, PTHREAD_COND_INITIALIZER};
     struct villager villagers[atoi(av[1])];
     struct druid d = { atoi(av[2]), atoi(av[4]), &v };
     pthread_t threads[atoi(av[1]) + 1];

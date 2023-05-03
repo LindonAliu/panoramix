@@ -20,7 +20,7 @@ static void villager_fight(struct villager *v)
 
 static void villager_drink(struct villager *v)
 {
-    pthread_mutex_lock(&v->village->potion_mutex);
+    pthread_mutex_lock(&v->village->villager_mutex);
 
     printf("Villager %ld: I need a drink... I see %ld servings left.\n",
         v->id, v->village->nb_potions);
@@ -31,7 +31,7 @@ static void villager_drink(struct villager *v)
         pthread_cond_signal(&v->village->druid_cond);
         while (v->village->call_druid) {
             pthread_cond_wait(&v->village->villager_cond,
-                &v->village->potion_mutex);
+                &v->village->druid_mutex);
         }
         v->village->nb_potions--;
         v->drunk = true;
@@ -40,7 +40,7 @@ static void villager_drink(struct villager *v)
         v->drunk = true;
     }
 
-    pthread_mutex_unlock(&v->village->potion_mutex);
+    pthread_mutex_unlock(&v->village->villager_mutex);
 }
 
 void *villager(void *arg)
