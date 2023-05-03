@@ -25,6 +25,7 @@ void *druid(void *arg)
         d->village->call_druid = false;
         printf("Druid: Ah! Yes, yes I'm awake! Working on it! Beware I can only make %ld more refills after this one.\n", d->nb_refills);
         pthread_mutex_unlock(&d->village->potion_mutex);
+        pthread_cond_signal(&d->village->villager_cond);
     }
     printf("Druid: I'm out of viscus. I'm going back to... zZz\n");
     pthread_mutex_unlock(&d->village->potion_mutex);
