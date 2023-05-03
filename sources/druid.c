@@ -11,7 +11,7 @@
 void *druid(void *arg)
 {
     struct druid *d = arg;
-    const char *msg = "Ah! Yes, yes I'm awake! Working on it! Beware";
+    const char *msg = "Ah! Yes, yes, I'm awake! Working on it! Beware";
 
     printf("Druid: I'm ready... but sleepy...\n");
     while (d->nb_refills > 0) {
@@ -27,7 +27,7 @@ void *druid(void *arg)
         pthread_mutex_unlock(&d->village->druid_mutex);
         pthread_cond_signal(&d->village->villager_cond);
     }
-    printf("Druid: I'm out of viscus. I'm going back to... zZz\n");
+    printf("Druid: I'm out of viscum. I'm going back to... zZz\n");
     pthread_mutex_unlock(&d->village->druid_mutex);
     return NULL;
 }

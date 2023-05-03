@@ -41,3 +41,4 @@ struct village {
 typedef void *handler_t(void *arg);
 handler_t druid;
 handler_t villager;
+    
