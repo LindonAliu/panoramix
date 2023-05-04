@@ -64,11 +64,10 @@ $(LIBMY):
 	$(MAKE) $(DEBUGFLAGS) -C lib/my
 
 clean_cov:
-	@find . \( -name "#*#" -or -name "*~" -or -name "*.gcda"  \) -delete
+	@find . \( -name "*.gcno" -or -name "*.gcda"  \) -delete
 
 clean:	clean_cov
 	@$(MAKE) clean -C lib/my
-	@find . -name "*.gcno" -delete
 	@rm -f $(OBJ_EXEC) $(OBJ_TEST)
 	@rm -rf obj
 
