@@ -38,7 +38,7 @@ static void create_threads(int nb_villagers, struct villager villagers[],
 
 int panoramix(const char *av[])
 {
-    struct village v = {atoi(av[2]), false, false,
+    struct village v = {atoi(av[2]), false,
         PTHREAD_MUTEX_INITIALIZER, PTHREAD_COND_INITIALIZER,
         PTHREAD_MUTEX_INITIALIZER, PTHREAD_COND_INITIALIZER};
     struct villager villagers[atoi(av[1])];

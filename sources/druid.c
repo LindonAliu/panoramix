@@ -44,7 +44,6 @@ void *druid(void *arg)
         unlock_and_send_signal(d->village);
     }
     printf("Druid: I'm out of viscum. I'm going back to... zZz\n");
-    d->village->no_more_refills = true;
     pthread_mutex_unlock(&d->village->druid_mutex);
     return NULL;
 }

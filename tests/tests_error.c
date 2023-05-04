@@ -35,3 +35,9 @@ Test(all_errors, test_argc)
     cr_assert_eq(error_handling(5, incorrect_av0), -1);
     cr_assert_eq(error_handling(2, incorrect_av1), -1);
 }
+
+// Test(panoramix, test_pano)
+// {
+//     char *av[] = {"./panoramix", "3", "5", "3", "50", NULL};
+//     cr_assert_eq(panoramix(av), 0);
+// }

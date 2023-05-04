@@ -31,7 +31,6 @@ struct druid {
 struct village {
     size_t nb_potions;
     bool call_druid;
-    bool no_more_refills;
     pthread_mutex_t villager_mutex;
     pthread_cond_t villager_cond;
     pthread_mutex_t druid_mutex;
