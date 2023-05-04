@@ -40,11 +40,6 @@ void *druid(void *arg)
     while (d->nb_refills > 0) {
         pthread_mutex_lock(&d->village->druid_mutex);
         waiting_villager_call_druid(d->village);
-        if (all_fights_are_over(d->village)) {
-            printf("Druid: the fights are over!\n");
-            unlock_and_send_signal(d->village);
-            return NULL;
-        }
         refill_potions(d);
         unlock_and_send_signal(d->village);
     }

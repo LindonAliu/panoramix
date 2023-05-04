@@ -47,6 +47,7 @@ static void villager_drink(struct villager *v)
     } else {
         drink(v);
     }
+
     pthread_mutex_unlock(&v->village->villager_mutex);
 }
 
@@ -60,14 +61,5 @@ void *villager(void *arg)
         villager_fight(v);
     }
     printf("Villager %ld: I'm going to sleep now.\n", v->id);
-
-    pthread_mutex_lock(&v->village->villager_mutex);
-    v->village->nb_villagers_finished++;
-    pthread_mutex_unlock(&v->village->villager_mutex);
-
-    if (all_fights_are_over(v->village) && !v->village->no_more_refills) {
-        call_druid(v);
-        printf("je lache lantenne villager\n");
-    }
     return NULL;
 }

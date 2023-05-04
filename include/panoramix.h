@@ -30,8 +30,6 @@ struct druid {
 
 struct village {
     size_t nb_potions;
-    size_t nb_villagers;
-    size_t nb_villagers_finished;
     bool call_druid;
     bool no_more_refills;
     pthread_mutex_t villager_mutex;
@@ -39,8 +37,6 @@ struct village {
     pthread_mutex_t druid_mutex;
     pthread_cond_t druid_cond;
 };
-
-bool all_fights_are_over(struct village *v);
 
 typedef void *handler_t(void *arg);
 handler_t druid;

@@ -31,19 +31,14 @@ static void create_threads(int nb_villagers, struct villager villagers[],
     for (int i = 0; i < nb_villagers; i++) {
         pthread_create(&threads[i], NULL, &villager, &villagers[i]);
     }
-    for (int i = 0; i < nb_villagers + 1; i++) {
+    for (int i = 0; i < nb_villagers; i++) {
         pthread_join(threads[i], NULL);
     }
 }
 
-bool all_fights_are_over(struct village *v)
-{
-    return (v->nb_villagers == v->nb_villagers_finished);
-}
-
 int panoramix(const char *av[])
 {
-    struct village v = {atoi(av[2]), atoi(av[1]), 0, false, false,
+    struct village v = {atoi(av[2]), false, false,
         PTHREAD_MUTEX_INITIALIZER, PTHREAD_COND_INITIALIZER,
         PTHREAD_MUTEX_INITIALIZER, PTHREAD_COND_INITIALIZER};
     struct villager villagers[atoi(av[1])];
